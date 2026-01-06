@@ -1,12 +1,13 @@
-import PublicNavBar from "@/components/shared/PublicNavbar";
+import PublicNavBar from '@/components/shared/PublicNavbar'
+import React from 'react'
 
-const commonLayout=({children}:{children:React.ReactNode})=>{
-    return (
-            <>
-            <PublicNavBar/>
-              {children}
-            </>
-    )
+const commonLayout=({children}:{children:React.ReactNode})=> {
+  return (
+    <>
+        <PublicNavBar></PublicNavBar>
+      {children}
+    </>
+  )
 }
 
-export default commonLayout;
+export default commonLayout
