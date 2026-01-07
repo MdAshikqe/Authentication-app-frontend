@@ -9,11 +9,11 @@ import { toast } from 'sonner'
 
 const RegisterForm = () => {
     const [state,formAction,isloading]=useActionState(register,null);
-    console.log("state",state.message)
     useEffect(()=>{
-        if(state && !state.success && state.message){
+        if(state && !state.sucess && state.message){
            toast.error(state.message);
         }
+
     },[state])
 
   return (

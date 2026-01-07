@@ -1,34 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import React from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card'
 import { Field, FieldDescription, FieldGroup, FieldLabel } from './ui/field'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
-import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import { useActionState } from 'react'
+import { loginUser } from '@/services/auth/loginUser'
 
-const LoginForm = ({
-  className,
-  ...props
-}: React.ComponentProps<"div">) => {
+const LoginForm = () => {
+  const [state,formAction,isloading]=useActionState(loginUser,null);
+  console.log("state",state,isloading)
   return (
-   <form>
-     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form>
+        <form action={formAction}>
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   id="email"
                   type="email"
+                  name="email"
                   placeholder="m@example.com"
                   required
                 />
@@ -43,20 +33,16 @@ const LoginForm = ({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" name="password" type="password" required />
               </Field>
               <Field>
                 <Button type="submit">Login</Button>
                 <FieldDescription className="text-center">
-                  Don&apos;t have an account? <a><Link href="/register">Register Now</Link></a>
+                  Don&apos;t have an account? <Link href="/register">Register Now</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
           </form>
-        </CardContent>
-      </Card>
-    </div>
-   </form>
   )
 }
 
