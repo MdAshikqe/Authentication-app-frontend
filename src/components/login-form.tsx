@@ -36,7 +36,9 @@ const LoginForm = () => {
                 <Input id="password" name="password" type="password" required />
               </Field>
               <Field>
-                <Button type="submit">Login</Button>
+                <Button type="submit" disabled={isloading}>
+                  {isloading ? "Logging in...." : "Login"}
+                </Button>
                 <FieldDescription className="text-center">
                   Don&apos;t have an account? <Link href="/register">Register Now</Link>
                 </FieldDescription>
