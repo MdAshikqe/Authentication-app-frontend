@@ -9,6 +9,15 @@ import { loginUser } from '@/services/auth/loginUser'
 
 const LoginForm = () => {
   const [state,formAction,isloading]=useActionState(loginUser,null);
+
+  const getFieldError=(fieldName:string)=>{
+        if(state && state?.errors){
+          const error=state.errors.find((err:any)=>err.field===fieldName)
+          return error?.message;
+        }else{
+          return null;
+        }
+  }
   console.log("state",state,isloading)
   return (
         <form action={formAction}>
@@ -20,8 +29,14 @@ const LoginForm = () => {
                   type="email"
                   name="email"
                   placeholder="m@example.com"
-                  required
                 />
+                {
+                  getFieldError("email") && (
+                    <FieldDescription className='text-red-600'>
+                      {getFieldError("email")}
+                    </FieldDescription>
+                  )
+                }
               </Field>
               <Field>
                 <div className="flex items-center">
@@ -33,7 +48,18 @@ const LoginForm = () => {
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" name="password" type="password" required />
+                <Input 
+                id="password"
+                name="password" 
+                type="password" 
+                 />
+                  {
+                  getFieldError("password") && (
+                    <FieldDescription className='text-red-600'>
+                      {getFieldError("password")}
+                    </FieldDescription>
+                  )
+                }
               </Field>
               <Field>
                 <Button type="submit" disabled={isloading}>
