@@ -12,7 +12,6 @@ type RouteConfig = {
 const authRoutes = [
   "/login",
   "/create-client",
-  "/refress-token",
   "/change-password",
   "/forgot-password",
   "/reset-password",
