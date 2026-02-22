@@ -31,6 +31,17 @@ const clientProtectionRoutes: RouteConfig = {
   patterns: [/^\/client/],
   exact: [],
 };
+
+const isAuthRoutes = (pathname: string) => {
+  return authRoutes.some((route: string) => route === pathname);
+};
+
+const isRoutesMatches = (pathname: string, routes: RouteConfig): boolean => {
+  if (routes.exact.includes(pathname)) {
+    return true;
+  }
+  return routes.patterns.some((pattern: RegExp) => pattern.test(pathname));
+};
 export function proxy(request: NextRequest) {
   console.log("pathname", request.nextUrl.pathname);
   return NextResponse.next();
